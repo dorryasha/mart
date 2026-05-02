@@ -734,4 +734,94 @@ button:hover {
   gap: 1rem;
   justify-content: center;
   margin-top: 1.5rem;
-}}
+}}.notifications-container {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  max-width: 340px;
+}
+
+.notification {
+  padding: 0.9rem 1.4rem;
+  border-radius: 1rem;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  backdrop-filter: blur(6px);
+  animation: slideIn 0.3s ease;
+}
+
+.notif-success {
+  background: linear-gradient(135deg, #78b892, #a8d5ba);
+}
+
+.notif-error {
+  background: linear-gradient(135deg, #e07a7a, #f4a2a2);
+}
+
+.notif-info {
+  background: linear-gradient(135deg, #f0b27a, #f6c89a);
+  color: #4a3b2f;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(120%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.25);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1500;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-card {
+  background: white;
+  padding: 2.2rem;
+  border-radius: 1.8rem;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+  max-width: 420px;
+  width: 90%;
+  text-align: center;
+  animation: popIn 0.25s ease;
+}
+
+@keyframes popIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.modal-card h3 {
+  font-size: 1.4rem;
+  margin-bottom: 0.6rem;
+}
+
+.modal-card p {
+  color: #666;
+  margin-bottom: 1.8rem;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 0.8rem;
+  justify-content: center;
+}
