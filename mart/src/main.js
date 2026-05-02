@@ -3,11 +3,6 @@ import App from './App.vue'
 import router from './router'
 import './assets/styles.css'
 
-createApp(App).use(router).mount('#app')import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router'
-import './assets/styles.css'
-
 const USERS_KEY = 'mart_users'
 if (!localStorage.getItem(USERS_KEY)) {
   const defaultUsers = [
