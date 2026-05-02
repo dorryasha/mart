@@ -2,35 +2,44 @@
 import { useRoute, useRouter } from 'vue-router'
 import { useGroupCards } from '../stores/useGroupCards'
 import { useAuth } from '../stores/useAuth'
+import { useNotifications } from '../stores/useNotifications'
+import { useModal } from '../stores/useModal'
 import { computed } from 'vue'
 
 const route = useRoute()
 const router = useRouter()
 const { currentUser } = useAuth()
 const { groupCards, markAsPaid, confirmPayment, rejectPayment, deleteCard } = useGroupCards()
+const { show } = useNotifications()
+const { open } = useModal()
 
 const card = computed(() => groupCards.value.find(c => c.id === route.params.id))
 
-function handlePay() {
+async function handlePay() {
   markAsPaid(card.value.id)
+  show('Оплата отправлена на подтверждение', 'success')
 }
 
-function confirm(login) {
+async function confirm(login) {
   confirmPayment(card.value.id, login)
+  show(`Оплата от ${login} подтверждена`, 'success')
 }
 
-function reject(login) {
+async function reject(login) {
   rejectPayment(card.value.id, login)
+  show(`Оплата от ${login} отклонена`, 'error')
 }
 
-function removeCard() {
-  if (confirm('Удалить карточку?')) {
+async function removeCard() {
+  const ok = await open('Удаление карточки', 'Удалить эту групповую карточку?')
+  if (ok) {
     deleteCard(card.value.id)
     router.push('/groupcards')
+    show('Групповая карточка удалена', 'error')
   }
 }
 
-const isAdminOrFlorist = computed(() => ['admin','florist'].includes(currentUser.value?.role))
+const isAdminOrFlorist = computed(() => ['admin', 'florist'].includes(currentUser.value?.role))
 </script>
 
 <template>

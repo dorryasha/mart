@@ -19,7 +19,7 @@ export function useOrders() {
       userLogin,
       items: items.map(i => ({ ...i })),
       total,
-      status: 'Новый', // Новый, Подтверждён, Отменён
+      status: 'Новый', 
       createdAt: new Date().toISOString()
     }
     orders.value.push(order)

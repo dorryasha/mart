@@ -29,7 +29,7 @@ export function useGroupCards() {
       total,
       participants: allParticipants.map(login => ({
         login,
-        status: 'not_paid' // not_paid, pending, paid
+        status: 'not_paid' 
       })),
       share,
       createdAt: new Date().toISOString(),

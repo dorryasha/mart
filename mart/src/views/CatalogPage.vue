@@ -13,7 +13,14 @@ const router = useRouter()
 const typeFilter = ref('')
 const occasionFilter = ref('')
 const sortBy = ref('')
+import { useNotifications } from '../stores/useNotifications'
 
+const { show } = useNotifications()
+
+function addToCart(product) {
+  addItem(product, 'product')
+  show('Добавлено в корзину', 'success')
+}
 const filteredProducts = computed(() => {
   let list = [...products.value]
   if (typeFilter.value) list = list.filter(p => p.type === typeFilter.value)
@@ -51,16 +58,22 @@ const filteredProducts = computed(() => {
 
   <div class="catalog-grid">
     <div v-for="product in filteredProducts" :key="product.id" class="card">
-      <h3>{{ product.name }}</h3>
-      <p>{{ product.composition }}</p>
-      <p><strong>{{ product.price }} ₽</strong></p>
-      <div style="display:flex; gap:0.5rem; margin-top:0.5rem;">
-        <button class="btn" @click="addItem(product, 'product')">В корзину</button>
-        <button @click="toggle(product, 'product')">
-          {{ isFavorite(product.id, 'product') ? '💖' : '🤍' }}
-        </button>
-        <button class="btn" @click="router.push('/catalog/'+product.id)">Детали</button>
-      </div>
-    </div>
+  <img
+    :src="product.image"
+    :alt="product.name"
+    class="card-img"
+    @error="e => e.target.src = '/images/placeholder.jpg'"
+  />
+  <h3>{{ product.name }}</h3>
+  <p>{{ product.composition }}</p>
+  <p><strong>{{ product.price }} ₽</strong></p>
+  <div class="card-actions">
+    <button class="btn" @click="addItem(product, 'product')">В корзину</button>
+    <button @click="toggle(product, 'product')" class="btn-fav">
+      {{ isFavorite(product.id, 'product') ? '💖' : '🤍' }}
+    </button>
+    <button class="btn" @click="router.push('/catalog/'+product.id)">Детали</button>
+  </div>
+</div>
   </div>
 </template>

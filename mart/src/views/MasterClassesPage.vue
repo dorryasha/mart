@@ -9,7 +9,14 @@ const { masterClasses } = useCatalog()
 const { addItem } = useCart()
 const { toggle, isFavorite } = useFavorites()
 const router = useRouter()
+import { useNotifications } from '../stores/useNotifications'
 
+const { show } = useNotifications()
+
+function addToCart(mc) {
+  addItem(mc, 'masterclass')
+  show('Запись добавлена в корзину', 'success')
+}
 const dateFrom = ref('')
 const dateTo = ref('')
 const themeFilter = ref('')
@@ -44,18 +51,27 @@ const filteredMC = computed(() => {
   </div>
 
   <div class="catalog-grid">
-    <div v-for="mc in filteredMC" :key="mc.id" class="card">
-      <h3>{{ mc.theme }}</h3>
-      <p>{{ mc.description }}</p>
-      <p><strong>{{ mc.date }}</strong></p>
-      <p>Цена: {{ mc.price }} ₽ | Мест: {{ mc.places }}</p>
-      <div style="display:flex; gap:0.5rem; margin-top:0.5rem;">
-        <button class="btn" @click="addItem(mc, 'masterclass')">Записаться</button>
-        <button @click="toggle(mc, 'masterclass')">
-          {{ isFavorite(mc.id, 'masterclass') ? '💖' : '🤍' }}
-        </button>
-        <button class="btn" @click="router.push('/masterclasses/'+mc.id)">Детали</button>
-      </div>
-    </div>
+   <div v-for="mc in filteredMC" :key="mc.id" class="card">
+  <img
+    :src="mc.image"
+    :alt="mc.theme"
+    class="card-img"
+    @error="e => e.target.src = '/images/placeholder.jpg'"
+  />
+  <h3>{{ mc.theme }}</h3>
+  <p>{{ mc.description }}</p>
+  <p><strong>{{ mc.date }}</strong></p>
+  <p>Цена: {{ mc.price }} ₽ | Мест: {{ mc.places }}</p>
+  <div class="card-actions">
+    <button class="btn" @click="addToCart(mc)">Записаться</button>
+    <button
+      @click="toggle(mc, 'masterclass')"
+      class="btn-fav"
+    >
+      {{ isFavorite(mc.id, 'masterclass') ? '💖' : '🤍' }}
+    </button>
+    <button class="btn" @click="router.push('/masterclasses/'+mc.id)">Детали</button>
+  </div>
+</div>
   </div>
 </template>

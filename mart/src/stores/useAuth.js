@@ -3,7 +3,6 @@ import { ref, watchEffect } from 'vue'
 const STORAGE_KEY = 'mart_auth'
 const currentUser = ref(null)
 
-// Восстановление сессии
 try {
   const saved = localStorage.getItem(STORAGE_KEY)
   if (saved) currentUser.value = JSON.parse(saved)
@@ -28,7 +27,7 @@ export function useAuth() {
       login,
       email,
       phone,
-      password, // в реальном проекте хешировать!
+      password, 
       role: 'user',
       createdAt: new Date().toISOString()
     }

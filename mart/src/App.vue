@@ -2,6 +2,8 @@
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuth } from './stores/useAuth'
+import AppNotification from './views/AppNotification.vue'
+import AppModal from './views/AppModal.vue'
 
 const { currentUser, logout } = useAuth()
 const router = useRouter()
