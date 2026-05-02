@@ -46,7 +46,8 @@ function handleLogout() {
   <main class="container content">
     <router-view />
   </main>
-
+<AppNotification />
+<AppModal />
   <footer class="footer">
     <div class="container">
       <router-link to="/about">О магазине</router-link>

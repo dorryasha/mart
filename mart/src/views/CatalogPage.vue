@@ -68,7 +68,7 @@ const filteredProducts = computed(() => {
   <p>{{ product.composition }}</p>
   <p><strong>{{ product.price }} ₽</strong></p>
   <div class="card-actions">
-    <button class="btn" @click="addItem(product, 'product')">В корзину</button>
+    <button class="btn" @click="addToCart(product)">В корзину</button>
     <button @click="toggle(product, 'product')" class="btn-fav">
       {{ isFavorite(product.id, 'product') ? '💖' : '🤍' }}
     </button>
