@@ -73,7 +73,7 @@ const total = computed(() => cart.value.reduce((s, i) => s + i.price * i.quantit
   <div v-else>
     <div v-for="item in cart" :key="item.id + item.type" class="cart-card">
       <img
-        :src="item.image || '/images/placeholder.jpg'"
+        :src="item.image || '/mart/images/placeholder.jpg'"
         :alt="item.name || item.theme"
         class="cart-card-img"
       />

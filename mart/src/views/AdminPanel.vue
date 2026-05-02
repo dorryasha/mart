@@ -125,7 +125,7 @@ async function deleteUserWithConfirm(userId) {
     <div class="catalog-grid">
       <div v-for="product in products" :key="product.id" class="card">
         <img
-          :src="product.image || '/images/placeholder.jpg'"
+          :src="product.image || '/mart/images/placeholder.jpg'"
           :alt="product.name"
           class="card-img"
         />
@@ -163,7 +163,7 @@ async function deleteUserWithConfirm(userId) {
     <div class="catalog-grid">
       <div v-for="mc in masterClasses" :key="mc.id" class="card">
         <img
-          :src="mc.image || '/images/placeholder.jpg'"
+          :src="mc.image || '/mart/images/placeholder.jpg'"
           :alt="mc.theme"
           class="card-img"
         />

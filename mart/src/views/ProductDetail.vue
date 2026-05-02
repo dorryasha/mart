@@ -20,7 +20,7 @@ const product = computed(() => products.value.find(p => p.id === route.params.id
       :src="product.image"
       :alt="product.name"
       class="detail-img"
-      @error="e => e.target.src = '/images/placeholder.jpg'"
+      @error="e => e.target.src = '/mart/images/placeholder.jpg'"
     />
     <h1>{{ product.name }}</h1>
     <p><strong>Состав:</strong> {{ product.composition }}</p>

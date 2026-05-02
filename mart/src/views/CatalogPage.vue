@@ -62,7 +62,7 @@ const filteredProducts = computed(() => {
     :src="product.image"
     :alt="product.name"
     class="card-img"
-    @error="e => e.target.src = '/images/placeholder.jpg'"
+    @error="e => e.target.src = '/mart/images/placeholder.jpg'"
   />
   <h3>{{ product.name }}</h3>
   <p>{{ product.composition }}</p>

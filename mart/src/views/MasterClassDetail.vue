@@ -19,7 +19,7 @@ const mc = computed(() => masterClasses.value.find(m => m.id === route.params.id
       :src="mc.image"
       :alt="mc.theme"
       class="detail-img"
-      @error="e => e.target.src = '/images/placeholder.jpg'"
+      @error="e => e.target.src = '/mart/images/placeholder.jpg'"
     />
     <h1>{{ mc.theme }}</h1>
     <p>{{ mc.description }}</p>

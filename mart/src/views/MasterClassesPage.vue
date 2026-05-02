@@ -56,7 +56,7 @@ const filteredMC = computed(() => {
     :src="mc.image"
     :alt="mc.theme"
     class="card-img"
-    @error="e => e.target.src = '/images/placeholder.jpg'"
+    @error="e => e.target.src = '/mart/images/placeholder.jpg'"
   />
   <h3>{{ mc.theme }}</h3>
   <p>{{ mc.description }}</p>

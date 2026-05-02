@@ -4,16 +4,16 @@ const STORAGE_PRODUCTS = 'mart_products'
 const STORAGE_MASTERCLASSES = 'mart_masterclasses'
 
 const defaultProducts = [
-  { id: 'p1', name: 'Букет "Нежность"', composition: 'Розы, пионы, эвкалипт', price: 3500, type: 'букет', occasion: 'день рождения', image: '/images/bouquet1.jpg' },
-  { id: 'p2', name: 'Роза красная', composition: 'Одна роза', price: 500, type: 'цветок', occasion: 'любой', image: '/images/rose1.jpg' },
-  { id: 'p3', name: 'Букет "Свадебный"', composition: 'Белые розы, фрезии', price: 4500, type: 'букет', occasion: 'свадьба', image: '/images/bouquet2.jpg' },
-  { id: 'p4', name: 'Композиция "Осень"', composition: 'Хризантемы, ягоды', price: 2800, type: 'композиция', occasion: 'благодарность', image: '/images/composition1.jpg' },
+  { id: 'p1', name: 'Букет "Нежность"', composition: 'Розы, пионы, эвкалипт', price: 3500, type: 'букет', occasion: 'день рождения', image: '/mart/images/bouquet1.jpg' },
+  { id: 'p2', name: 'Роза красная', composition: 'Одна роза', price: 500, type: 'цветок', occasion: 'любой', image: '/mart/images/rose1.jpg' },
+  { id: 'p3', name: 'Букет "Свадебный"', composition: 'Белые розы, фрезии', price: 4500, type: 'букет', occasion: 'свадьба', image: '/mart/images/bouquet2.jpg' },
+  { id: 'p4', name: 'Композиция "Осень"', composition: 'Хризантемы, ягоды', price: 2800, type: 'композиция', occasion: 'благодарность', image: '/mart/images/composition1.jpg' },
 ]
 
 const defaultMasterClasses = [
-  { id: 'm1', theme: 'Основы флористики', date: '2026-05-15', price: 2000, places: 10, description: 'Научитесь составлять букеты', image: '/images/masterclass1.jpg' },
-  { id: 'm2', theme: 'Свадебная флористика', date: '2026-05-20', price: 3000, places: 8, description: 'Букет невесты и бутоньерка', image: '/images/wedding.jpg' },
-  { id: 'm3', theme: 'Цветочные композиции', date: '2026-06-01', price: 2500, places: 12, description: 'Создаём интерьерные композиции', image: '/images/masterclass2.jpg' },
+  { id: 'm1', theme: 'Основы флористики', date: '2026-05-15', price: 2000, places: 10, description: 'Научитесь составлять букеты', image: '/mart/images/masterclass1.jpg' },
+  { id: 'm2', theme: 'Свадебная флористика', date: '2026-05-20', price: 3000, places: 8, description: 'Букет невесты и бутоньерка', image: '/mart/images/wedding.jpg' },
+  { id: 'm3', theme: 'Цветочные композиции', date: '2026-06-01', price: 2500, places: 12, description: 'Создаём интерьерные композиции', image: '/mart/images/masterclass2.jpg' },
 ]
 
 const products = ref([])
