@@ -1,16 +1,9 @@
 import { ref, watchEffect } from 'vue'
 
 const STORAGE_KEY = 'mart_users'
-const users = ref([])
 
-try {
-  const saved = localStorage.getItem(STORAGE_KEY)
-  if (saved) users.value = JSON.parse(saved)
-} catch (e) {}
-
-// Если нет пользователей, создаём админа
-if (users.value.length === 0) {
-  users.value.push({
+const defaultUsers = [
+  {
     id: 'admin1',
     login: 'admin',
     email: 'admin@mart.ru',
@@ -18,8 +11,8 @@ if (users.value.length === 0) {
     password: 'admin123',
     role: 'admin',
     createdAt: new Date().toISOString()
-  })
-  users.value.push({
+  },
+  {
     id: 'florist1',
     login: 'florist',
     email: 'florist@mart.ru',
@@ -27,8 +20,26 @@ if (users.value.length === 0) {
     password: 'florist123',
     role: 'florist',
     createdAt: new Date().toISOString()
-  })
+  }
+]
+
+const users = ref([])
+
+function initUsers() {
+  const saved = localStorage.getItem(STORAGE_KEY)
+  if (!saved) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultUsers))
+    users.value = defaultUsers
+  } else {
+    try {
+      users.value = JSON.parse(saved)
+    } catch (e) {
+      users.value = defaultUsers
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultUsers))
+    }
+  }
 }
+initUsers()
 
 watchEffect(() => {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(users.value))
