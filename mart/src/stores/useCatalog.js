@@ -5,7 +5,7 @@ const STORAGE_MASTERCLASSES = 'mart_masterclasses'
 
 const defaultProducts = [
   { id: 'p1', name: 'Букет "Нежность"', composition: 'Розы, пионы, эвкалипт', price: 3500, type: 'букет', occasion: 'день рождения', image: '/mart/images/bouquet1.jpg' },
-  { id: 'p2', name: 'Роза красная', composition: 'Одна роза', price: 500, type: 'цветок', occasion: 'любой', image: '/mart/images/rose1.jpg' },
+  { id: 'p2', name: 'Роза красная', composition: 'Одна роза', price: 500, type: 'цветок', occasion: 'любой', image: '/mart/images/rose2.jpg' },
   { id: 'p3', name: 'Букет "Свадебный"', composition: 'Белые розы, фрезии', price: 4500, type: 'букет', occasion: 'свадьба', image: '/mart/images/bouquet2.jpg' },
   { id: 'p4', name: 'Композиция "Осень"', composition: 'Хризантемы, ягоды', price: 2800, type: 'композиция', occasion: 'благодарность', image: '/mart/images/composition1.jpg' },
 ]
