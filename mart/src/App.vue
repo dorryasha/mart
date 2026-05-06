@@ -45,14 +45,11 @@ function handleLogout() {
   </header>
 
   <main class="container content">
-    <router-view v-slot="{ Component }">
-  <transition name="fade" mode="out-in">
-    <component :is="Component" />
-  </transition>
-</router-view>
+    <router-view />
   </main>
 <AppNotification />
 <AppModal />
+<AppScrollTop />
   <footer class="footer">
     <div class="container">
       <router-link to="/about">О магазине</router-link>
