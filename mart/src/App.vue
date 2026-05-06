@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router'
 import { useAuth } from './stores/useAuth'
 import AppNotification from './views/AppNotification.vue'
 import AppModal from './views/AppModal.vue'
+import AppScrollTop from './views/AppScrollTop.vue'
 
 const { currentUser, logout } = useAuth()
 const router = useRouter()
@@ -44,7 +45,11 @@ function handleLogout() {
   </header>
 
   <main class="container content">
-    <router-view />
+    <router-view v-slot="{ Component }">
+  <transition name="fade" mode="out-in">
+    <component :is="Component" />
+  </transition>
+</router-view>
   </main>
 <AppNotification />
 <AppModal />
