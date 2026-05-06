@@ -12,6 +12,15 @@ const { register } = useAuth()
 const router = useRouter()
 
 async function handleSubmit() {
+  error.value = ''
+  if (!email.value.includes('@') || !email.value.includes('.')) {
+    error.value = 'Введите корректный email'
+    return
+  }
+  if (password.value.length < 4) {
+    error.value = 'Пароль должен быть не менее 4 символов'
+    return
+  }
   try {
     await register(login.value, email.value, phone.value, password.value)
     router.push('/')
