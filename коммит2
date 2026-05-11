@@ -1,0 +1,5 @@
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    showNotification('Добро пожаловать! Функция успешно подключена.', 'success');
+  });
+</script>
