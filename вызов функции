@@ -1,0 +1,8 @@
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    showNotification('Добро пожаловать! Функция успешно подключена.', 'success');
+  });
+</script>
+
+git add githab2.htm
+git commit -m "Добавлен автоматический вызов showNotification при загрузке страницы для тестирования"
