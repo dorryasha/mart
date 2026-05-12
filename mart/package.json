@@ -1,6 +1,6 @@
 {
   "name": "mart",
-  "base": "/https://dorryasha.github.io/"
+  "homepage": "/https://dorryasha.github.io/mart",
   "private": true,
   "version": "1.0.0",
   "type": "module",
