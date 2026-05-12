@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router'
 import { useAuth } from './stores/useAuth'
 import AppNotification from './views/AppNotification.vue'
 import AppModal from './views/AppModal.vue'
+import AppScrollTop from './views/AppScrollTop.vue'
 
 const { currentUser, logout } = useAuth()
 const router = useRouter()
@@ -48,6 +49,7 @@ function handleLogout() {
   </main>
 <AppNotification />
 <AppModal />
+<AppScrollTop />
   <footer class="footer">
     <div class="container">
       <router-link to="/about">О магазине</router-link>
