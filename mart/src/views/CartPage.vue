@@ -101,22 +101,61 @@ const total = computed(() => cart.value.reduce((s, i) => s + i.price * i.quantit
         </button>
       </div>
 
-      <div v-if="showGroupForm" class="group-form">
-        <h3>Добавьте участников (по логину)</h3>
-        <div class="group-form-row">
-          <input v-model="participantLogin" placeholder="Логин участника" />
-          <button class="btn" @click="addParticipant">Добавить</button>
-        </div>
-        <ul v-if="participants.length" class="participant-list">
-          <li v-for="p in participants" :key="p">
-            {{ p }}
-            <button @click="removeParticipant(p)" class="btn-sm">✕</button>
-          </li>
-        </ul>
-        <button v-if="participants.length" class="btn" @click="handleCreateGroup">
-          Создать сбор
-        </button>
-      </div>
+      <div
+  v-if="showGroupForm"
+  class="group-form"
+>
+  <h3 class="group-form-title">
+    Создание группового сбора
+  </h3>
+
+  <p class="group-form-subtitle">
+    Добавьте участников по логину
+  </p>
+
+  <div class="group-form-row">
+    <input
+      v-model="participantLogin"
+      placeholder="Введите логин"
+      class="group-input"
+    />
+
+    <button
+      class="btn"
+      @click="addParticipant"
+    >
+      Добавить
+    </button>
+  </div>
+
+  <div
+    v-if="participants.length"
+    class="participants-wrapper"
+  >
+    <div
+      v-for="p in participants"
+      :key="p"
+      class="participant-pill"
+    >
+      <span>{{ p }}</span>
+
+      <button
+        @click="removeParticipant(p)"
+        class="pill-remove"
+      >
+        ✕
+      </button>
+    </div>
+  </div>
+
+  <button
+    v-if="participants.length"
+    class="create-group-btn"
+    @click="handleCreateGroup"
+  >
+    Создать сбор
+  </button>
+</div>
     </div>
   </div>
 </template>

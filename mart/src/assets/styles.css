@@ -1057,3 +1057,68 @@ button:hover {
   font-weight: 700;
 }
 
+.group-form {
+  margin-top: 24px;
+  padding: 28px;
+  border-radius: 24px;
+  background: white;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+}
+
+.group-form-title {
+  margin-bottom: 8px;
+}
+
+.group-form-subtitle {
+  margin-bottom: 20px;
+  color: #777;
+}
+
+.group-form-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.group-input {
+  flex: 1;
+  padding: 14px;
+  border: 1px solid #ddd;
+  border-radius: 14px;
+  font-size: 16px;
+}
+
+.participants-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.participant-pill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: #f3f3f3;
+  font-weight: 600;
+}
+
+.pill-remove {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: #999;
+}
+
+.create-group-btn {
+  border: none;
+  padding: 14px 22px;
+  border-radius: 14px;
+  background: #b7e4c7;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 16px;
+}
+
