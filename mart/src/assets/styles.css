@@ -879,6 +879,7 @@ button:hover {
 }
 
 .info-block {
+  transition: all 0.25s ease;
   flex: 1;
   padding: 20px;
   border-radius: 18px;
@@ -905,6 +906,7 @@ button:hover {
 }
 
 .product-item {
+  transition: all 0.2s ease;
   display: flex;
   justify-content: space-between;
   padding: 14px 0;
@@ -916,6 +918,8 @@ button:hover {
 }
 
 .participant-card {
+  transition: all 0.25s ease;
+cursor: default;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1215,4 +1219,35 @@ button:hover {
   margin-top: 10px;
   color: #777;
   font-size: 14px;
+}
+
+.participant-card:hover {
+  transform: translateX(6px);
+  background: #f3f3f3;
+}
+
+.product-item:hover {
+  padding-left: 10px;
+  background: #fafafa;
+}
+
+.info-block:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+}
+
+.group-detail-card {
+  animation: fadeCardIn 0.35s ease;
+}
+
+@keyframes fadeCardIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
