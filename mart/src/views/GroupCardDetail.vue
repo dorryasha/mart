@@ -47,7 +47,7 @@ const isAdminOrFlorist = computed(() => ['admin', 'florist'].includes(currentUse
     v-if="card"
     class="group-detail-page"
   >
-    <div class="group-detail-card">
+    <div class="group-detail-card wide-group-card">
       <div class="group-detail-header">
         <div>
           <h1>Групповая карточка</h1>
@@ -112,10 +112,25 @@ const isAdminOrFlorist = computed(() => ['admin', 'florist'].includes(currentUse
           class="participant-card"
         >
           <div class="participant-left">
-            <span>
-              {{ p.login }}
-            </span>
-          </div>
+
+  <div class="participant-avatar">
+    {{ p.login.charAt(0).toUpperCase() }}
+  </div>
+
+  <div class="participant-user-info">
+    <span class="participant-name">
+      {{ p.login }}
+    </span>
+
+    <span
+      v-if="p.login === card.initiator"
+      class="participant-role"
+    >
+      Создатель
+    </span>
+  </div>
+
+</div>
 
           <div class="participant-right">
             <span

@@ -840,18 +840,19 @@ button:hover {
 }
 
 .group-detail-page {
-  display: flex;
-  justify-content: center;
-  padding: 40px 20px;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 60px 20px;
 }
 
 .group-detail-card {
   width: 100%;
-  max-width: 900px;
-  padding: 32px;
-  border-radius: 24px;
+  max-width: 1200px;
+  padding: 42px;
+  border-radius: 28px;
   background: white;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.08);
 }
 
 .group-detail-header {
@@ -918,6 +919,7 @@ button:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  min-height: 72px;
   padding: 18px;
   margin-bottom: 14px;
   border-radius: 16px;
@@ -932,6 +934,8 @@ button:hover {
 }
 
 .participant-right {
+  flex-wrap: wrap;
+ justify-content: flex-end;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -1133,4 +1137,46 @@ button:hover {
   color: var(--danger);
   font-size: 14px;
   font-weight: 500;
+}
+
+.participant-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #a8d5ba, #78b892);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 16px;
+  box-shadow: 0 4px 10px rgba(120, 184, 146, 0.25);
+}
+
+.participant-user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.participant-name {
+  font-weight: 600;
+}
+
+.participant-role {
+  font-size: 13px;
+  color: #888;
+}
+
+.group-products,
+.participants-section {
+  width: 100%;
+}
+
+.wide-group-card {
+  max-width: 1400px !important;
+  width: 100%;
+}
+
+.group-detail-card {
+  min-width: 1000px;
 }
