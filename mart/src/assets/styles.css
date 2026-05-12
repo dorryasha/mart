@@ -676,6 +676,8 @@ button:hover {
 
 .tabs button:hover:not(.active) {
   background: var(--primary-light);
+}
+
 .notifications-container {
   position: fixed;
   top: 1.5rem;
@@ -743,7 +745,9 @@ button:hover {
   gap: 1rem;
   justify-content: center;
   margin-top: 1.5rem;
-}}.notifications-container {
+}
+
+.notifications-container {
   position: fixed;
   top: 1.5rem;
   right: 1.5rem;
@@ -1122,3 +1126,11 @@ button:hover {
   font-size: 16px;
 }
 
+.participant-error {
+  margin-top: -10px;
+  margin-bottom: 16px;
+  margin-left: 4px;
+  color: var(--danger);
+  font-size: 14px;
+  font-weight: 500;
+}

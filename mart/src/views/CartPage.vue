@@ -7,11 +7,13 @@ import { useAuth } from '../stores/useAuth'
 import { useRouter } from 'vue-router'
 import { useNotifications } from '../stores/useNotifications'
 import { useModal } from '../stores/useModal'
+import { useUsers } from '../stores/useUsers'
 
 const { cart, removeItem, changeQuantity, clearCart } = useCart()
 const { createCard } = useGroupCards()
 const { createOrder } = useOrders()
 const { currentUser } = useAuth()
+const { users } = useUsers()
 const router = useRouter()
 const { show } = useNotifications()
 const { open } = useModal()
@@ -19,12 +21,41 @@ const { open } = useModal()
 const showGroupForm = ref(false)
 const participantLogin = ref('')
 const participants = ref([])
+const participantError = ref('')
 
 function addParticipant() {
-  if (participantLogin.value && !participants.value.includes(participantLogin.value)) {
-    participants.value.push(participantLogin.value)
-    participantLogin.value = ''
+  const login = participantLogin.value.trim()
+  participantError.value = ''
+
+  if (!login) {
+    participantError.value = 'Введите логин'
+    return
   }
+
+  const userExists = users.value.some(
+    user => user.login === login
+  )
+
+  if (!userExists) {
+    participantError.value = 'Пользователь не найден'
+    return
+  }
+
+  if (participants.value.includes(login)) {
+    participantError.value = 'Участник уже добавлен'
+    return
+  }
+
+  if (login === currentUser.value.login) {
+    participantError.value = 'Вы уже участвуете в сборе'
+    return
+  }
+
+  participants.value.push(login)
+
+  participantLogin.value = ''
+
+  show('Участник добавлен', 'success')
 }
 
 function removeParticipant(login) {
@@ -110,22 +141,32 @@ const total = computed(() => cart.value.reduce((s, i) => s + i.price * i.quantit
   </h3>
 
   <p class="group-form-subtitle">
-    Добавьте участников по логину
+  Добавьте участников по логину
   </p>
 
   <div class="group-form-row">
-    <input
-      v-model="participantLogin"
-      placeholder="Введите логин"
-      class="group-input"
-    />
+  <input
+    v-model="participantLogin"
+    placeholder="Введите логин"
+    class="group-input"
+  />
 
-    <button
-      class="btn"
-      @click="addParticipant"
-    >
-      Добавить
-    </button>
+  <button
+    class="btn"
+    @click="addParticipant"
+  >
+    Добавить
+  </button>
+</div>
+
+<p
+  v-if="participantError"
+  class="participant-error"
+>
+  {{ participantError }}
+</p>
+
+    
   </div>
 
   <div
@@ -156,6 +197,5 @@ const total = computed(() => cart.value.reduce((s, i) => s + i.price * i.quantit
     Создать сбор
   </button>
 </div>
-    </div>
-  </div>
+</div>
 </template>
