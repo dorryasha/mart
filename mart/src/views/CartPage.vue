@@ -7,11 +7,13 @@ import { useAuth } from '../stores/useAuth'
 import { useRouter } from 'vue-router'
 import { useNotifications } from '../stores/useNotifications'
 import { useModal } from '../stores/useModal'
+import { useUsers } from '../stores/useUsers'
 
 const { cart, removeItem, changeQuantity, clearCart } = useCart()
 const { createCard } = useGroupCards()
 const { createOrder } = useOrders()
 const { currentUser } = useAuth()
+const { users } = useUsers()
 const router = useRouter()
 const { show } = useNotifications()
 const { open } = useModal()
@@ -19,12 +21,41 @@ const { open } = useModal()
 const showGroupForm = ref(false)
 const participantLogin = ref('')
 const participants = ref([])
+const participantError = ref('')
 
 function addParticipant() {
-  if (participantLogin.value && !participants.value.includes(participantLogin.value)) {
-    participants.value.push(participantLogin.value)
-    participantLogin.value = ''
+  const login = participantLogin.value.trim()
+  participantError.value = ''
+
+  if (!login) {
+    participantError.value = 'Введите логин'
+    return
   }
+
+  const userExists = users.value.some(
+    user => user.login === login
+  )
+
+  if (!userExists) {
+    participantError.value = 'Пользователь не найден'
+    return
+  }
+
+  if (participants.value.includes(login)) {
+    participantError.value = 'Участник уже добавлен'
+    return
+  }
+
+  if (login === currentUser.value.login) {
+    participantError.value = 'Вы уже участвуете в сборе'
+    return
+  }
+
+  participants.value.push(login)
+
+  participantLogin.value = ''
+
+  show('Участник добавлен', 'success')
 }
 
 function removeParticipant(login) {
@@ -101,22 +132,70 @@ const total = computed(() => cart.value.reduce((s, i) => s + i.price * i.quantit
         </button>
       </div>
 
-      <div v-if="showGroupForm" class="group-form">
-        <h3>Добавьте участников (по логину)</h3>
-        <div class="group-form-row">
-          <input v-model="participantLogin" placeholder="Логин участника" />
-          <button class="btn" @click="addParticipant">Добавить</button>
-        </div>
-        <ul v-if="participants.length" class="participant-list">
-          <li v-for="p in participants" :key="p">
-            {{ p }}
-            <button @click="removeParticipant(p)" class="btn-sm">✕</button>
-          </li>
-        </ul>
-        <button v-if="participants.length" class="btn" @click="handleCreateGroup">
-          Создать сбор
-        </button>
-      </div>
+      <div
+  v-if="showGroupForm"
+  class="group-form"
+>
+  <h3 class="group-form-title">
+    Создание группового сбора
+  </h3>
+
+  <p class="group-form-subtitle">
+  Добавьте участников по логину
+  </p>
+
+  <div class="group-form-row">
+  <input
+    v-model="participantLogin"
+    placeholder="Введите логин"
+    class="group-input"
+  />
+
+  <button
+    class="btn"
+    @click="addParticipant"
+  >
+    Добавить
+  </button>
+</div>
+
+<p
+  v-if="participantError"
+  class="participant-error"
+>
+  {{ participantError }}
+</p>
+
+    
+  </div>
+
+  <div
+    v-if="participants.length"
+    class="participants-wrapper"
+  >
+    <div
+      v-for="p in participants"
+      :key="p"
+      class="participant-pill"
+    >
+      <span>{{ p }}</span>
+
+      <button
+        @click="removeParticipant(p)"
+        class="pill-remove"
+      >
+        ✕
+      </button>
     </div>
   </div>
+
+  <button
+    v-if="participants.length"
+    class="create-group-btn"
+    @click="handleCreateGroup"
+  >
+    Создать сбор
+  </button>
+</div>
+</div>
 </template>
