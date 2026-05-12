@@ -15,6 +15,18 @@ const { open } = useModal()
 
 const card = computed(() => groupCards.value.find(c => c.id === route.params.id))
 
+const paidCount = computed(() => {
+  return card.value.participants.filter(
+    p => p.status === 'paid'
+  ).length
+})
+
+const paymentProgress = computed(() => {
+  return Math.round(
+    (paidCount.value / card.value.participants.length) * 100
+  )
+})
+
 async function handlePay() {
   markAsPaid(card.value.id)
   show('Оплата отправлена на подтверждение', 'success')
@@ -104,6 +116,28 @@ const isAdminOrFlorist = computed(() => ['admin', 'florist'].includes(currentUse
       </div>
 
       <div class="participants-section">
+        <div class="payment-progress-wrapper">
+
+  <div class="payment-progress-top">
+    <span>Прогресс оплаты</span>
+
+    <span>
+      {{ paidCount }} / {{ card.participants.length }}
+    </span>
+  </div>
+
+  <div class="payment-progress-bar">
+    <div
+      class="payment-progress-fill"
+      :style="{ width: paymentProgress + '%' }"
+    ></div>
+  </div>
+
+  <p class="payment-progress-text">
+    Оплачено {{ paymentProgress }}%
+  </p>
+
+</div>
         <h2>Участники</h2>
 
         <div
