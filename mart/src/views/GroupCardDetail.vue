@@ -43,42 +43,144 @@ const isAdminOrFlorist = computed(() => ['admin', 'florist'].includes(currentUse
 </script>
 
 <template>
-  <div v-if="card">
-    <h1>Групповая карточка</h1>
-    <p>Инициатор: {{ card.initiator }}</p>
-    <p>Создана: {{ new Date(card.createdAt).toLocaleDateString() }}</p>
-    <p>Общая сумма: {{ card.total }} ₽</p>
-    <p>Доля каждого: {{ card.share.toFixed(2) }} ₽</p>
+  <div
+    v-if="card"
+    class="group-detail-page"
+  >
+    <div class="group-detail-card">
+      <div class="group-detail-header">
+        <div>
+          <h1>Групповая карточка</h1>
 
-    <h3>Товары/Мастер-классы:</h3>
-    <ul>
-      <li v-for="item in card.items" :key="item.id">
-        {{ item.name || item.theme }} ({{ item.price }} ₽) x{{ item.quantity }}
-      </li>
-    </ul>
+          <p class="group-creator">
+            Инициатор: {{ card.initiator }}
+          </p>
 
-    <h3>Участники:</h3>
-    <ul>
-      <li v-for="p in card.participants" :key="p.login">
-        {{ p.login }} –
-        <span :class="{
-          'status-red': p.status === 'not_paid',
-          'status-yellow': p.status === 'pending',
-          'status-green': p.status === 'paid'
-        }">
-          {{ p.status === 'not_paid' ? 'Не оплачено' : p.status === 'pending' ? 'Ожидает подтверждения' : 'Оплачено' }}
-        </span>
-        <template v-if="p.login === currentUser?.login && p.status === 'not_paid'">
-          <button @click="handlePay" class="btn">Я оплатил</button>
-        </template>
-        <template v-if="isAdminOrFlorist && p.status === 'pending'">
-          <button @click="confirm(p.login)" class="btn" style="background:var(--success)">Подтвердить</button>
-          <button @click="reject(p.login)" class="btn-danger">Отклонить</button>
-        </template>
-      </li>
-    </ul>
+          <p class="group-date">
+            Создана:
+            {{ new Date(card.createdAt).toLocaleDateString() }}
+          </p>
+        </div>
+      </div>
 
-    <button @click="removeCard" class="btn-danger" style="margin-top:1rem">Удалить карточку</button>
+      <div class="group-info">
+        <div class="info-block">
+          <span class="info-label">
+            Общая сумма
+          </span>
+
+          <span class="info-value">
+            {{ card.total }} ₽
+          </span>
+        </div>
+
+        <div class="info-block">
+          <span class="info-label">
+            Доля каждого
+          </span>
+
+          <span class="info-value">
+            {{ card.share.toFixed(2) }} ₽
+          </span>
+        </div>
+      </div>
+
+      <div class="group-products">
+        <h2>Товары / Мастер-классы</h2>
+
+        <div
+          v-for="item in card.items"
+          :key="item.id"
+          class="product-item"
+        >
+          <span>
+            {{ item.name || item.theme }}
+          </span>
+
+          <span>
+            {{ item.price }} ₽ × {{ item.quantity }}
+          </span>
+        </div>
+      </div>
+
+      <div class="participants-section">
+        <h2>Участники</h2>
+
+        <div
+          v-for="p in card.participants"
+          :key="p.login"
+          class="participant-card"
+        >
+          <div class="participant-left">
+            <span>
+              {{ p.login }}
+            </span>
+          </div>
+
+          <div class="participant-right">
+            <span
+              :class="[
+                'payment-status',
+                p.status
+              ]"
+            >
+              {{
+                p.status === 'not_paid'
+                  ? 'Не оплачено'
+                  : p.status === 'pending'
+                  ? 'Ожидает подтверждения'
+                  : 'Оплачено'
+              }}
+            </span>
+
+            <template
+              v-if="
+                p.login === currentUser?.login &&
+                p.status === 'not_paid'
+              "
+            >
+              <button
+                @click="handlePay"
+                class="pay-btn"
+              >
+                Я оплатил
+              </button>
+            </template>
+
+            <template
+              v-if="
+                isAdminOrFlorist &&
+                p.status === 'pending'
+              "
+            >
+              <button
+                @click="confirm(p.login)"
+                class="confirm-btn"
+              >
+                Подтвердить
+              </button>
+
+              <button
+                @click="reject(p.login)"
+                class="reject-btn"
+              >
+                Отклонить
+              </button>
+            </template>
+          </div>
+        </div>
+      </div>
+
+      <button
+        @click="removeCard"
+        class="delete-card-btn"
+      >
+        Удалить карточку
+      </button>
+    </div>
   </div>
-  <div v-else>Карточка не найдена</div>
+
+  <div v-else>
+    Карточка не найдена
+  </div>
 </template>
